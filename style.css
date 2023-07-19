@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+body{
+    background-color: #c5e6f3;
+}
+
+.carta{ 
+margin-top: 15%;
+max-width: 70%;
+}
+
+
+.lista{
+    margin-top: 100px;
+}
+
+.btnEliminar{
+    color: red;
+}
