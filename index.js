@@ -1,9 +1,10 @@
 let formulario = document.getElementById("formulario")
 let tarea = document.getElementById("tarea")
-// let fecha = document.getElementById("fecha")
-// let precioUnitario = document.getElementById("precioUnitario")
 let btnAdd = document.getElementsByClassName("btn-add")
 let btnBorrar = document.getElementsByClassName("btnBorrar")
+const check = "fa-check-circle"
+const uncheck = "fa-circle"
+const lineaTachar = "line-through"
 
 //CREADOR DE ID AUTOINCREMENTAL.
 // Variable global para almacenar el último ID utilizado
@@ -30,58 +31,39 @@ function validacion(e){
         console.log("campos completos correctamente");
     }
   
-    agregarTarea()
+    agregarTarea(false, false)
 }
 
-function agregarTarea(){
+function agregarTarea(realizado, eliminado){
   // e.preventDefault();
   limpiarLista()
 
-  
-  
   let tarea = document.getElementById("tarea").value;
-  // let fecha = document.getElementById("fecha").value;
-  // let precioUnitario = document.getElementById("precioUnitario").value;
-  
-  let nuevaTarea = {id, tarea }
-  
+  let nuevaTarea = {id, tarea}
   items.push(nuevaTarea)
   console.log(items);
-  
-  //Vacio el formulario 
-  document.getElementById("tarea").value = "";
-  // document.getElementById("fecha").value = "";
-  // document.getElementById("precioUnitario").value = "";
-
   generateTaskId()
 
-    items.forEach( e =>{
+  let completo = realizado ? false : {realizado : uncheck}
+  console.log(completo);
+
+
+
+
+    items.forEach( tarea => {
       let listaTareas = document.createElement("li")
-      
-      listaTareas.innerHTML += `Tarea: ${e.tarea}  `
+      listaTareas.innerHTML += `  <i class = "far fa-circle co" data = "realizado"></i>
+                                  <p> Tarea: ${tarea.tarea}  </p> 
+                                  <i class = "fas fa-trash de" data = "eliminado"></i>
+                                `
         listaOrden.appendChild(listaTareas)
 
         //solo creo el boton de eliminar. sin funcionalidad todavia.
-        btnEliminar()
-
-        //-------------------------------------------------- EDICION DE REGALOS ---------------------------------------------------
-       
-        
-                //Vacio el formulario 
-                    document.getElementById("tarea").value = "";
-                    // document.getElementById("fecha").value = "";
-                    // document.getElementById("precioUnitario").value = "";
-                    
-                    
-
+        // btnEliminar()
+        //Vacio el formulario 
+        document.getElementById("tarea").value = "";
       })
-      
-
     }
-
-    // -------------------------------------------------------------------------
-
-
 
 
 
@@ -93,12 +75,12 @@ function limpiarLista() {
 }
 
 // CREO BOTON DE ELIMINAR CADA VEZ QUE SE AGREGA UN PRODUCTO
-function btnEliminar() {
-  let btnEliminar = document.createElement("button")
-      btnEliminar.classList.add("btnEliminar")
-      btnEliminar.innerHTML = "Eliminar"
-      listaOrden.appendChild(btnEliminar)
-}
+// function btnEliminar() {
+//   let btnEliminar = document.createElement("button")
+//       btnEliminar.classList.add("btnEliminar")
+//       btnEliminar.innerHTML = "Eliminar"
+//       listaOrden.appendChild(btnEliminar)
+// }
 
 
 
