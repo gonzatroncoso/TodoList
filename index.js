@@ -2,7 +2,7 @@ let formulario = document.getElementById("formulario")
 let tarea = document.getElementById("tarea")
 let btnAdd = document.getElementsByClassName("btn-add")
 let btnBorrar = document.getElementsByClassName("btnBorrar")
-const check = "fa-check-circle"
+const check = "fa-circle-check"
 const uncheck = "fa-circle"
 const lineaTachar = "line-through"
 
@@ -39,31 +39,46 @@ function agregarTarea(realizado, eliminado){
   limpiarLista()
 
   let tarea = document.getElementById("tarea").value;
-  let nuevaTarea = {id, tarea}
+  let nuevaTarea = {id, tarea, realizado:false, eliminado:false}
   items.push(nuevaTarea)
   console.log(items);
   generateTaskId()
 
-  let completo = realizado ? false : {realizado : uncheck}
-  console.log(completo);
-
-
-
 
     items.forEach( tarea => {
-      let listaTareas = document.createElement("li")
-      listaTareas.innerHTML += `  <i class = "far fa-circle co" data = "realizado"></i>
-                                  <p> Tarea: ${tarea.tarea}  </p> 
-                                  <i class = "fas fa-trash de" data = "eliminado"></i>
-                                `
-        listaOrden.appendChild(listaTareas)
+        if (eliminado) {
+          return
+        }
 
-        //solo creo el boton de eliminar. sin funcionalidad todavia.
-        // btnEliminar()
-        //Vacio el formulario 
-        document.getElementById("tarea").value = "";
+        let completo = realizado ? check : uncheck
+        let linea = realizado ? lineaTachar : ""
+
+        let listaTareas = document.createElement("li")
+            listaTareas.innerHTML += `  
+                                        <i class = "far ${completo}" data = "realizado"  id=${tarea.id}></i>
+                                        <p class = "text ${linea}"> ${tarea.tarea}  </p> 
+                                        <i class = "fas fa-trash de" data = "eliminado"  id=${tarea.id}></i>
+                                      `
+            listaOrden.appendChild(listaTareas)
+
+            document.getElementById("tarea").value = "";
       })
     }
+
+   
+
+
+    listaOrden.addEventListener("click", function (e) {
+      const elemento = e.target
+      const elementoData = elemento.attributes.data.value
+     console.log(elementoData);
+
+      if (elementoData == "realizado") {
+        tareaRealizada(elemento)
+      } else if (elementoData == "eliminado"){
+        tareaEliminada(elemento)
+      }
+    })
 
 
 
@@ -73,6 +88,31 @@ function limpiarLista() {
     divTarea.removeChild(divTarea.firstChild)
   }
 }
+
+function tareaRealizada(elemento) {
+  elemento.classList.toggle(check)
+  elemento.classList.toggle(uncheck)
+  console.log(items[elemento.id].realizado);
+  items[elemento.id].realizado = items[elemento.id].realizado ? false : true
+  console.log(items[elemento.id].realizado);
+}
+
+function tareaEliminada(elemento) {
+  // elemento ? id : ""
+
+  elemento.parentNode.parentNode.removeChild(elemento.parentNode)
+  // items[elemento.id].eliminado = true
+  console.log(elemento.id);
+
+  let remove = elemento.id
+  items.splice(remove, 1)
+  // console.log(elemento.id);
+
+  console.log(items);
+}
+
+
+
 
 // CREO BOTON DE ELIMINAR CADA VEZ QUE SE AGREGA UN PRODUCTO
 // function btnEliminar() {
