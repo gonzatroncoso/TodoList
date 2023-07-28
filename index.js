@@ -35,15 +35,12 @@ function validacion(e){
 }
 
 function agregarTarea(realizado, eliminado){
-  // e.preventDefault();
   limpiarLista()
 
   let tarea = document.getElementById("tarea").value;
   let nuevaTarea = {id, tarea, realizado:false, eliminado:false}
   items.push(nuevaTarea)
-  console.log(items);
   generateTaskId()
-
 
     items.forEach( tarea => {
         if (eliminado) {
@@ -60,7 +57,6 @@ function agregarTarea(realizado, eliminado){
                                         <i class = "fas fa-trash de" data = "eliminado"  id=${tarea.id}></i>
                                       `
             listaOrden.appendChild(listaTareas)
-
             document.getElementById("tarea").value = "";
       })
     }
@@ -71,13 +67,11 @@ function agregarTarea(realizado, eliminado){
     listaOrden.addEventListener("click", function (e) {
       const elemento = e.target
       const elementoData = elemento.attributes.data.value
-     console.log(elementoData);
-
-      if (elementoData == "realizado") {
-        tareaRealizada(elemento)
-      } else if (elementoData == "eliminado"){
-        tareaEliminada(elemento)
-      }
+        if (elementoData == "realizado") {
+          tareaRealizada(elemento)
+        } else if (elementoData == "eliminado"){
+          tareaEliminada(elemento)
+        }
     })
 
 
@@ -89,43 +83,14 @@ function limpiarLista() {
   }
 }
 
-function tareaRealizada(elemento) {
-  elemento.classList.toggle(check)
-  elemento.classList.toggle(uncheck)
-  console.log(items[elemento.id].realizado);
-  items[elemento.id].realizado = items[elemento.id].realizado ? false : true
-  console.log(items[elemento.id].realizado);
-}
+  function tareaRealizada(elemento) {
+      elemento.classList.toggle(check)
+      elemento.classList.toggle(uncheck)
+      items[elemento.id].realizado = items[elemento.id].realizado ? false : true
+    }
 
-function tareaEliminada(elemento) {
-  // elemento ? id : ""
-
-  elemento.parentNode.parentNode.removeChild(elemento.parentNode)
-  // items[elemento.id].eliminado = true
-  console.log(elemento.id);
-
-  let remove = elemento.id
-  items.splice(remove, 1)
-  // console.log(elemento.id);
-
-  console.log(items);
-}
-
-
-
-
-// CREO BOTON DE ELIMINAR CADA VEZ QUE SE AGREGA UN PRODUCTO
-// function btnEliminar() {
-//   let btnEliminar = document.createElement("button")
-//       btnEliminar.classList.add("btnEliminar")
-//       btnEliminar.innerHTML = "Eliminar"
-//       listaOrden.appendChild(btnEliminar)
-// }
-
-
-
-
-
-//https://www.youtube.com/watch?v=9N7iuyYnqpg
-
-//https://www.youtube.com/watch?v=DEbNCqe2e2U
+    function tareaEliminada(elemento) {
+      elemento.parentNode.parentNode.removeChild(elemento.parentNode)
+      let remove = elemento.id
+      items.splice(remove, 1)
+    }

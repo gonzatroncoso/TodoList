@@ -73,16 +73,3 @@ li{
 ol, ul {
     padding: 15px;
 }
-
-.tareas{
-    /* display: flex; */
-    /* flex-direction: row; */
-}
-
-.btnEliminar{
-/* display: flex; */
-}
-
-.text{
-    /* text-decoration: line-through; */
-}
