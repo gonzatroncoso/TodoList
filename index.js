@@ -35,6 +35,9 @@ function validacion(e){
 }
 
 function agregarTarea(realizado, eliminado){
+  if (eliminado) {
+    return
+  }
   limpiarLista()
 
   let tarea = document.getElementById("tarea").value;
@@ -43,9 +46,6 @@ function agregarTarea(realizado, eliminado){
   generateTaskId()
 
     items.forEach( tarea => {
-        if (eliminado) {
-          return
-        }
 
         let completo = realizado ? check : uncheck
         let linea = realizado ? lineaTachar : ""

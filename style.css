@@ -16,7 +16,7 @@ body{
 }
 
 .img-fondo{
-    background-image: url(assets/fondo-todolist.jpg);
+    background-image: url(./assets/fondo-todolist.jpg);
     height: 40vh; 
     background-size: cover;
     background-position: center;
